@@ -1,0 +1,20 @@
+<div class="h-1/2 flex">
+    <div class="my-auto">
+        <div class="flex flex-row content-center gap-6 ml-10">
+            <div class="text-2xl hover:text-3xl cursor-pointer" [ngClass]="{'text-3xl' : showLogin$ | async}"
+                (click)="switchLogin(true)">Log in</div>
+            <div class="text-2xl hover:text-3xl cursor-pointer" [ngClass]="{'text-3xl' : !(showLogin$ | async)}"
+                (click)="switchLogin(false)">Sign up</div>
+        </div>
+    </div>
+</div>
+<div class=" h-1/2 rounded-tl-3xl bg-white p-12">
+    <div class="h-full max-w-sm m-auto">
+        <ng-container *ngIf="showLogin$ | async; else reg">
+            <app-login class="h-full" (login)="login($event)"></app-login>
+        </ng-container>
+        <ng-template #reg>
+            <app-register class="h-full" (register)="register($event)"></app-register>
+        </ng-template>
+    </div>
+</div>

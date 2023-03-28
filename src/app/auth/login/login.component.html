@@ -1,0 +1,21 @@
+<div [formGroup]="form" class="h-full flex flex-col justify-between">
+    <div>
+        <div>
+            <mat-form-field [style.width.%]="100" class="w-full">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field [style.width.%]="100" class="w-full">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix class="m-2" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+    <app-big-button class="w-full" [disabled]="!form.valid" (clickEvent)="submit()">Log in</app-big-button>
+</div>
