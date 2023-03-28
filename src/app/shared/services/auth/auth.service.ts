@@ -11,11 +11,21 @@ import { UserService } from '../user/user.service';
   providedIn: 'root'
 })
 export class AuthService {
-  public token$ = new BehaviorSubject<string | null>(null);
-  private client: HttpClient;
+  private jwtLocation = 'token';
   private url = `${environment.apiUrl}/auth`;
-  constructor(client: HttpClient, private userService: UserService) {
-    this.client = client;
+  constructor(private client: HttpClient, private userService: UserService) {
+  }
+
+  public get jwt(): string | null {
+    return localStorage.getItem(this.jwtLocation);
+  }
+
+  private set jwt(token: string | null) {
+    if (token) {
+      localStorage.setItem(this.jwtLocation, token);
+    } else {
+      localStorage.removeItem(this.jwtLocation);
+    }
   }
 
   public login(data: Login): Observable<LoginResponce> {
@@ -23,7 +33,7 @@ export class AuthService {
     return this.client.post<LoginResponce>(`${this.url}/login`, data)
       .pipe(
         tap(res => {
-          this.token$.next(res.token);
+          this.jwt = res.token;
           responce = res;
         }),
         switchMap(_ => this.userService.update()),

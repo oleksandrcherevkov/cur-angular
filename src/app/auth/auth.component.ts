@@ -4,6 +4,7 @@ import { BehaviorSubject, tap } from 'rxjs';
 import { AuthService } from '../shared/services/auth/auth.service';
 import { Login } from '../shared/services/auth/login.model';
 import { Register } from '../shared/services/auth/register.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -17,13 +18,14 @@ export class AuthComponent {
     this.showLogin$.next(state);
   }
 
-  constructor(private authService: AuthService, private toastr: ToastrService) {
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) {
 
   }
 
   public login(data: Login) {
     this.authService.login(data).pipe(
-      tap(() => this.toastr.success('Logged successfuly.'))
+      tap(() => this.toastr.success('Logged successfuly.')),
+      tap(_ => this.router.navigate(['/map'])),
     ).subscribe();
   }
 
