@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Login } from './login.model';
-import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, switchMap, tap } from 'rxjs';
 import { Register } from './register.model';
 import { LoginResponce } from './login-recponce.model';
 import { UserService } from '../user/user.service';
@@ -19,10 +19,15 @@ export class AuthService {
   }
 
   public login(data: Login): Observable<LoginResponce> {
+    let responce: LoginResponce;
     return this.client.post<LoginResponce>(`${this.url}/login`, data)
       .pipe(
-        tap(token => this.token$.next(token.token)),
-        tap(_ => this.userService.update().subscribe()),
+        tap(res => {
+          this.token$.next(res.token);
+          responce = res;
+        }),
+        switchMap(_ => this.userService.update()),
+        map(_ => responce),
       );
   }
 
