@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './shared/services/auth/jwt-interceptor.service';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { JwtInterceptor } from './shared/services/auth/jwt-interceptor.service';
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    LeafletModule,
   ],
   providers: [
     {
