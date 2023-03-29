@@ -7,12 +7,12 @@ import { Injectable } from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class BikeService {
   private url = `${environment.apiUrl}/bikes`;
   constructor(private client: HttpClient) {
   }
 
   public getAll(lon: number, lat: number, raius: number): Observable<Bike[]> {
-    return this.client.get<Bike[]>(`${this.url}?lon=${lon}&lat=${lat}&raius=${raius}`);
+    return this.client.get<Bike[]>(`${this.url}?lon=${lon}&lat=${lat}&radius=${raius}`);
   }
 }

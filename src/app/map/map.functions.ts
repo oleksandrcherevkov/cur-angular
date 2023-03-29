@@ -1,0 +1,1 @@
+export const gerRadius = (zoom: number) => 260 + (18 - zoom) * 10000;

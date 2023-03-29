@@ -13,6 +13,6 @@ export class StationService {
   }
 
   public getAll(lon: number, lat: number, raius: number): Observable<Station[]> {
-    return this.client.get<Station[]>(`${this.url}?lon=${lon}&lat=${lat}&raius=${raius}`);
+    return this.client.get<Station[]>(`${this.url}?lon=${lon}&lat=${lat}&radius=${raius}`);
   }
 }
