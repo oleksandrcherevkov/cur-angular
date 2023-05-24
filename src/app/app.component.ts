@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  public user$ = this.user.user$;
   constructor(private user: UserService, private router: Router) {
   }
   ngOnInit(): void {
     this.user.update()
-      .pipe(tap(_ => this.router.navigate(['/map'])))
       .subscribe();
   }
 }

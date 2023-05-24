@@ -15,4 +15,24 @@ export class BikeService {
   public getAll(lon: number, lat: number, raius: number): Observable<Bike[]> {
     return this.client.get<Bike[]>(`${this.url}?lon=${lon}&lat=${lat}&radius=${raius}`);
   }
+
+  public getById(id: string): Observable<Bike> {
+    return this.client.get<Bike>(`${this.url}/${id}`);
+  }
+
+  public create(): Observable<Bike> {
+    return this.client.post<Bike>(`${this.url}`, {});
+  }
+
+  public activate(id: string): Observable<Bike> {
+    return this.client.patch<Bike>(`${this.url}/${id}/activate`, {});
+  }
+
+  public repair(id: string): Observable<Bike> {
+    return this.client.patch<Bike>(`${this.url}/${id}/repair`, {});
+  }
+
+  public waste(id: string): Observable<Bike> {
+    return this.client.delete<Bike>(`${this.url}/${id}`, {});
+  }
 }

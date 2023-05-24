@@ -1,0 +1,13 @@
+<ng-container *ngIf="user$ | async as user">
+    <div class="text-7xl text-center mt-10">
+        {{user.balance / 60 | number:'1.0-0'}} minutes
+    </div>
+    <mat-selection-list #shoes [multiple]="false">
+        <mat-list-option *ngFor="let add of adds" [value]="add">
+            {{add.label}}
+        </mat-list-option>
+    </mat-selection-list>
+    <div class="px-5">
+        <button mat-flat-button color="primary" class="w-full" [disabled]="!selected" (click)="submit()">Add</button>
+    </div>
+</ng-container>

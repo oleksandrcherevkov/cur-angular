@@ -1,8 +1,8 @@
 import { Role } from "../auth/role.model";
 
 export interface User {
-    id: number,
-    email: number,
+    id: string,
+    email: string,
     role: Role,
     balance: number,
 }

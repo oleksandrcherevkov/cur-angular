@@ -1,0 +1,9 @@
+<div class="p-11">
+    <mat-form-field [style.width.%]="100" class="w-full">
+        <mat-label>Bike identifier</mat-label>
+        <input matInput [formControl]="idControl">
+    </mat-form-field>
+    <button mat-flat-button class="w-full" color="primary" (click)="submit()" [disabled]="!idControl.valid">
+        Find
+    </button>
+</div>

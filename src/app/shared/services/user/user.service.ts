@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { BehaviorSubject, EMPTY, Observable, catchError, tap } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { AddToBalance } from './add-to-balance.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,13 @@ export class UserService {
           this.router.navigate(['/auth']);
           return EMPTY;
         })
+      );
+  }
+
+  public addToBalance(data: AddToBalance) {
+    return this.client.post<User>(`${this.url}/balance/add`, data)
+      .pipe(
+        tap((user) => this.user$.next(user)),
       );
   }
 }

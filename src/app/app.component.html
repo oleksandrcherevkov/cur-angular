@@ -1,1 +1,13 @@
 <router-outlet class="h-screen"></router-outlet>
+<div *ngIf="user$ | async" class="absolute bottom-0 w-full rounded-tl-full px-20 py-5 flex justify-between shadow-2xl"
+    style="background-color: white; z-index: 20000;">
+    <button [routerLink]="['/map']" mat-fab color="primary">
+        <mat-icon>my_location</mat-icon>
+    </button>
+    <button [routerLink]="['/bike']" mat-fab color="primary">
+        <mat-icon>directions_bike</mat-icon>
+    </button>
+    <button [routerLink]="['/balance']" mat-fab color="primary">
+        <mat-icon>attach_money</mat-icon>
+    </button>
+</div>

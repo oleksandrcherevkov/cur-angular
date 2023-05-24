@@ -1,0 +1,9 @@
+<ng-container *ngIf="bike$ | async as bike; else find">
+    <div class="flex justify-center">
+        <qrcode [qrdata]="url" [allowEmptyString]="true" [ariaLabel]="'QR Code to bike'" [elementType]="'canvas'"
+            [errorCorrectionLevel]="'M'" [margin]="4" [scale]="1" [title]="'Bike'" [width]="300"></qrcode>
+    </div>
+</ng-container>
+<ng-template #find>
+    <app-find-bike (id)="onFind($event)"></app-find-bike>
+</ng-template>
