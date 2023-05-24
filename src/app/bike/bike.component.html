@@ -3,7 +3,40 @@
         <qrcode [qrdata]="url" [allowEmptyString]="true" [ariaLabel]="'QR Code to bike'" [elementType]="'canvas'"
             [errorCorrectionLevel]="'M'" [margin]="4" [scale]="1" [title]="'Bike'" [width]="300"></qrcode>
     </div>
+    <div class="text-lg text-center" *appIfRole="'Technician'">
+        {{bike.id}}
+    </div>
+    <div class="text-3xl text-center mb-4 mt-4">
+        <div>{{bikeStatuses[bike.status]}}</div>
+    </div>
+    <div class="flex flex-col gap-3 mb-4 px-4">
+        <ng-container *ngIf="bike.status === bikeStatuses.Active">
+            <button class="w-full" mat-flat-button color="primary" *appIfRole="'User'"
+                (click)="rent(bike.id)">Rent</button>
+        </ng-container>
+        <ng-container *ngIf="bike.status === bikeStatuses.Rented">
+            <button class="w-full" mat-flat-button color="accent" *appIfRole="'User'"
+                (click)="close(bike.id)">Return</button>
+        </ng-container>
+        <ng-container *ngIf="bike.status === bikeStatuses.Rented || bike.status === bikeStatuses.Active">
+            <button class="w-full" mat-flat-button color="accent" *appIfRole="'Technician'"
+                (click)="repair(bike.id)">Send to repair</button>
+        </ng-container>
+        <ng-container *ngIf="bike.status === bikeStatuses.Repairing">
+            <button class="w-full" mat-flat-button color="accent" *appIfRole="'Technician'"
+                (click)="activate(bike.id)">Activate</button>
+        </ng-container>
+        <ng-container *ngIf="bike.status === bikeStatuses.Repairing">
+            <button class="w-full" mat-flat-button color="warn" *appIfRole="'Technician'"
+                (click)="waste(bike.id)">Waste</button>
+        </ng-container>
+    </div>
 </ng-container>
 <ng-template #find>
     <app-find-bike (id)="onFind($event)"></app-find-bike>
 </ng-template>
+<div class="flex justify-end px-4">
+    <button mat-fab color="primary" *appIfRole="'Technician'" (click)="create()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>

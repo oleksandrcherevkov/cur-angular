@@ -9,6 +9,7 @@ import { Injectable } from "@angular/core";
 })
 export class BikeService {
   private url = `${environment.apiUrl}/bikes`;
+  private rentUrl = `${environment.apiUrl}/tickets`;
   constructor(private client: HttpClient) {
   }
 
@@ -34,5 +35,13 @@ export class BikeService {
 
   public waste(id: string): Observable<Bike> {
     return this.client.delete<Bike>(`${this.url}/${id}`, {});
+  }
+
+  public rent(id: string): Observable<void> {
+    return this.client.post<void>(`${this.rentUrl}/${id}`, {});
+  }
+
+  public close(id: string): Observable<void> {
+    return this.client.delete<void>(`${this.rentUrl}/${id}`, {});
   }
 }

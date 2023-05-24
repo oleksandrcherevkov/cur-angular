@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './shared/services/user/user.service';
-import { tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,6 +14,9 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.user.update()
+      .pipe(
+        switchMap(_ => this.router.navigate(['map'])),
+      )
       .subscribe();
   }
 }
